@@ -3,10 +3,17 @@ import 'dotenv/config';
 import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
+import connectDB from './config/db.js';
+
+
+
+
+
 
 const app = express();
 
-
+// Connect to the database
+await connectDB();
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
