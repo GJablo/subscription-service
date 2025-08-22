@@ -1,15 +1,10 @@
 import {Router} from 'express';
+import {signUp, signIn, signOut} from '../controllers/authController.js';
 
 const authRoutes = Router();
 
-authRoutes.post('/sign-up', (req, res) => {
-  res.send({title: 'Sign Up Page'});
-});
-authRoutes.post('/sign-in', (req, res) => {
-  res.send({title: 'Sign In Page'});
-});
-authRoutes.post('/sign-out', (req, res) => {
-  res.send({title: 'Sign Out Page'});
-});
+authRoutes.post('/sign-up', signUp);
+authRoutes.post('/sign-in', signIn);
+authRoutes.post('/sign-out', signOut);
 
 export default authRoutes;
