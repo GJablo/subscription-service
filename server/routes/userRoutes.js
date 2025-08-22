@@ -1,14 +1,10 @@
 import { Router } from 'express';
+import { getUsers, getUser } from '../controllers/userController.js';
 
 const userRoutes = Router();
 
-userRoutes.get('/', (req, res) => {
-  res.send({ title: 'GET all users' });
-});
-
-userRoutes.get('/:id', (req, res) => {
-  res.send({ title: `GET user with ID ${req.params.id}` });
-});
+userRoutes.get('/', getUsers);
+userRoutes.get('/:id', getUser);
 
 userRoutes.post('/', (req, res) => {
   res.send({ title: 'POST create a new user' });
