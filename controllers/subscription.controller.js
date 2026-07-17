@@ -62,3 +62,23 @@ export const deleteSubscriptionById = async (req, res, next) => {
     next(error);
   }
 };
+
+// update subscription by id
+export const updateSubscriptionById = async (req, res, next) => {
+  try {
+    const subscription = await Subscription.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!subscription) {
+      return res.status(404).json({ message: "Subscription not found" });
+    }
+    res.status(200).json({
+      message: "Subscription updated successfully",
+      data: subscription,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
