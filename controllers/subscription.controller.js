@@ -63,6 +63,32 @@ export const deleteSubscriptionById = async (req, res, next) => {
   }
 };
 
+// cancel subscription by user id
+export const cancelSubscription = async (req, res, next) => {
+  try {
+    const subscription = await Subscription.findById(req.params.id);
+    if (!subscription) {
+      return res.status(404).json({ message: "Subscription not found" });
+    }
+    if (subscription.user.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "Access denied! Not owner of Account" });
+    }
+    if (subscription.status === "canceled") {
+      return res.status(400).json({ message: "Subscription already canceled" });
+    }
+    subscription.status = "canceled";
+    await subscription.save();
+    res.status(200).json({
+      message: "Subscription canceled successfully",
+      data: subscription,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // update subscription by id
 export const updateSubscriptionById = async (req, res, next) => {
   try {
