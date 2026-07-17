@@ -5,6 +5,7 @@ import {
   getUserSubscriptions,
   getSubscriptionById,
   getSubscriptions,
+  deleteSubscriptionById,
 } from "../controllers/subscription.controller.js";
 
 const subscriptionRouter = Router();
@@ -15,9 +16,7 @@ subscriptionRouter.post("/", authorize, createSubscription);
 subscriptionRouter.put("/:id", (req, res) =>
   res.send({ message: "update subscription by id" }),
 );
-subscriptionRouter.delete("/:id", (req, res) =>
-  res.send({ message: "delete subscription by id" }),
-);
+subscriptionRouter.delete("/:id", authorize, deleteSubscriptionById);
 subscriptionRouter.get("/user/:id", authorize, getUserSubscriptions);
 // cancel subscription by user id
 subscriptionRouter.post("/cancel/:userId", (req, res) =>
