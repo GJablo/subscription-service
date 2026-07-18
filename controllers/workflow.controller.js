@@ -31,11 +31,13 @@ export const sendReminders = serve(async (context) => {
         reminderDate,
       );
     }
-    await triggerReminder(
-      context,
-      `${daysBefore} days before reminder`,
-      subscription,
-    );
+    if (dayjs().isSame(reminderDate, "day")) {
+      await triggerReminder(
+        context,
+        `${daysBefore} days before reminder`,
+        subscription,
+      );
+    }
   }
 });
 
