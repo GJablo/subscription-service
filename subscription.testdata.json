@@ -1,0 +1,134 @@
+{
+  "subscriptions": [
+    {
+      "name": "Netflix Premium",
+      "price": 15.99,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "entertainment",
+      "paymentMethod": "credit_card",
+      "status": "active",
+      "startDate": "2024-06-18T10:30:00Z"
+    },
+    {
+      "name": "Spotify Premium",
+      "price": 9.99,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "entertainment",
+      "paymentMethod": "debit_card",
+      "status": "active",
+      "startDate": "2024-05-01T14:20:00Z"
+    },
+    {
+      "name": "Gym Membership",
+      "price": 50,
+      "currency": "KES",
+      "frequency": "monthly",
+      "category": "health",
+      "paymentMethod": "mobile_money",
+      "status": "active",
+      "startDate": "2024-07-01T08:00:00Z"
+    },
+    {
+      "name": "Coursera Plus",
+      "price": 99,
+      "currency": "USD",
+      "frequency": "yearly",
+      "category": "education",
+      "paymentMethod": "credit_card",
+      "status": "active",
+      "startDate": "2024-01-15T09:00:00Z"
+    },
+    {
+      "name": "Adobe Creative Cloud",
+      "price": 54.99,
+      "currency": "EUR",
+      "frequency": "monthly",
+      "category": "utilities",
+      "paymentMethod": "paypal",
+      "status": "active",
+      "startDate": "2024-03-10T11:30:00Z"
+    },
+    {
+      "name": "Microsoft 365",
+      "price": 69.99,
+      "currency": "GBP",
+      "frequency": "yearly",
+      "category": "utilities",
+      "paymentMethod": "credit_card",
+      "status": "expired",
+      "startDate": "2023-01-20T10:00:00Z"
+    },
+    {
+      "name": "Disney Plus",
+      "price": 10.99,
+      "currency": "AUD",
+      "frequency": "monthly",
+      "category": "entertainment",
+      "paymentMethod": "debit_card",
+      "status": "canceled",
+      "startDate": "2024-05-15T16:45:00Z"
+    },
+    {
+      "name": "Amazon Prime",
+      "price": 12.99,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "entertainment",
+      "paymentMethod": "credit_card",
+      "status": "active",
+      "startDate": "2024-04-22T13:15:00Z"
+    },
+    {
+      "name": "Electricity Bill",
+      "price": 3500,
+      "currency": "KES",
+      "frequency": "monthly",
+      "category": "utilities",
+      "paymentMethod": "bank_transfer",
+      "status": "active",
+      "startDate": "2024-07-01T00:00:00Z"
+    },
+    {
+      "name": "LinkedIn Premium",
+      "price": 39.99,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "education",
+      "paymentMethod": "credit_card",
+      "status": "active",
+      "startDate": "2024-06-05T09:30:00Z"
+    },
+    {
+      "name": "Medium Membership",
+      "price": 168,
+      "currency": "USD",
+      "frequency": "yearly",
+      "category": "education",
+      "paymentMethod": "paypal",
+      "status": "active",
+      "startDate": "2024-02-28T12:00:00Z"
+    },
+    {
+      "name": "Health Insurance",
+      "price": 200,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "health",
+      "paymentMethod": "bank_transfer",
+      "status": "active",
+      "startDate": "2024-01-01T00:00:00Z"
+    },
+    {
+      "name": "Duolingo Plus",
+      "price": 6.99,
+      "currency": "USD",
+      "frequency": "monthly",
+      "category": "education",
+      "paymentMethod": "credit_card",
+      "status": "active",
+      "startDate": "2024-07-10T14:30:00Z"
+    }
+  ]
+}

@@ -62,4 +62,4 @@ typings/
 .next
 
 # Testdata 
-subscription.testdata.json
+#subscription.testdata.json
