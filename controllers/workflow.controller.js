@@ -1,5 +1,6 @@
 import Subscription from "../models/subscription.model.js";
 import dayjs from "dayjs";
+import { sendReminderEmail } from "../utils/send-email.js";
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -32,7 +33,8 @@ export const sendReminders = serve(async (context) => {
     }
     await triggerReminder(
       context,
-      `reminder-${daysBefore} days before renewal`,
+      `${daysBefore} days before reminder`,
+      subscription,
     );
   }
 });
@@ -53,9 +55,15 @@ const sleepUntilReminder = async (context, label, date) => {
 };
 
 // trigger the sendReminders workflow for a specific subscription
-const triggerReminder = async (context, label) => {
-  return await context.run(label, () => {
+const triggerReminder = async (context, label, subscription) => {
+  return await context.run(label, async () => {
     console.log(`Triggering ${label} reminder`);
     // send reminder logic (email, sms, push notification....)
+
+    await sendReminderEmail({
+      to: subscription.user.email,
+      type: label,
+      subscription: subscription,
+    });
   });
 };
