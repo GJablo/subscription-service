@@ -3,6 +3,16 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
+// Frontend and backend are deployed on different origins (Netlify / Vercel),
+// so the auth cookie needs sameSite: "none" to be sent cross-site. That in
+// turn requires secure: true, which only works over HTTPS in production.
+const isProduction = process.env.NODE_ENV === "production";
+const cookieOptions = {
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+};
+
 export const signUp = async (req, res, next) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -41,11 +51,7 @@ export const signUp = async (req, res, next) => {
       },
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.cookie("token", token, cookieOptions);
 
     await session.commitTransaction();
     session.endSession();
@@ -86,11 +92,7 @@ export const signIn = async (req, res, next) => {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.cookie("token", token, cookieOptions);
 
     res.status(200).json({
       success: true,
@@ -107,11 +109,7 @@ export const signIn = async (req, res, next) => {
 
 export const signOut = async (req, res, next) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.clearCookie("token", cookieOptions);
 
     res.status(200).json({
       success: true,
