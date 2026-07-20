@@ -2,7 +2,6 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import { PORT } from "./config/env.js";
 import connectDB from "./database/mongodb.js";
 
 import subscriptionRouter from "./routes/subscription.routes.js";
@@ -25,21 +24,19 @@ app.use(
 );
 app.use(arcjetMiddleware); // Apply Arcjet middleware to all routes
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the API");
+});
+
 app.use("/api/v1/subscriptions", subscriptionRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/workflows", workflowRouter);
 app.use(errorMiddleware);
 
-app.get("/", (req, res) => {
-  res.send("Welcome to the API");
-});
-
-app.listen(PORT, async () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-
-  // Connect to the database
-  await connectDB();
-});
+// Connecting here (rather than in the listen callback) means the app is
+// ready to serve requests as soon as it's imported, which is required for
+// serverless platforms that import this module without calling listen().
+await connectDB();
 
 export default app;

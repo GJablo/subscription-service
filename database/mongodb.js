@@ -7,14 +7,12 @@ if (!DB_URI) {
 }
 
 // connect to the database
+// Guarded against re-connecting on every invocation, since serverless
+// platforms (e.g. Vercel) can reuse the module across warm invocations.
 const connectDB = async () => {
-  try {
-    await mongoose.connect(DB_URI);
-    console.log(`Connected to MongoDB (${NODE_ENV})`);
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    process.exit(1); // Exit the process with failure
-  }
+  if (mongoose.connection.readyState === 1) return;
+  await mongoose.connect(DB_URI);
+  console.log(`Connected to MongoDB (${NODE_ENV})`);
 };
 
 export default connectDB;
