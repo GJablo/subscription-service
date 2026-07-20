@@ -41,6 +41,12 @@ export const signUp = async (req, res, next) => {
       },
     );
 
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+
     await session.commitTransaction();
     session.endSession();
 
@@ -80,6 +86,12 @@ export const signIn = async (req, res, next) => {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+
     res.status(200).json({
       success: true,
       message: "User signed in successfully",
@@ -93,4 +105,19 @@ export const signIn = async (req, res, next) => {
   }
 };
 
-export const signOut = async (req, res, next) => {};
+export const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User signed out successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
